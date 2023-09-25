@@ -11,18 +11,21 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
+const buttonState = () => {
+  button.start.disabled = !button.start.disabled;
+  button.stop.disabled = !button.stop.disabled;
+};
+
 const runColorize = () => {
   interval = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
   }, 1000);
-  button.start.disabled = true;
-  button.stop.disabled = false;
+  buttonState();
 };
 
 const stopColorize = () => {
   clearInterval(interval);
-  button.start.disabled = false;
-  button.stop.disabled = true;
+  buttonState();
 };
 
 button.start.addEventListener('click', runColorize);

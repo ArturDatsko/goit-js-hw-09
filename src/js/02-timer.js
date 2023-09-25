@@ -27,7 +27,13 @@ flatpickr(date, {
   },
 });
 
-start.addEventListener('click', onClick);
+function timerDisplay(days, hours, minutes, seconds) {
+  day.textContent = addLeadingZero(days);
+  hour.textContent = addLeadingZero(hours);
+  minute.textContent = addLeadingZero(minutes);
+  second.textContent = addLeadingZero(seconds);
+}
+
 function onClick() {
   start.disabled = true;
   date.disabled = true;
@@ -35,10 +41,7 @@ function onClick() {
     const choiseDate = new Date(date.value);
     const countdown = choiseDate - Date.now();
     const { days, hours, minutes, seconds } = convertMs(countdown);
-    day.textContent = addLeadingZero(days);
-    hour.textContent = addLeadingZero(hours);
-    minute.textContent = addLeadingZero(minutes);
-    second.textContent = addLeadingZero(seconds);
+    timerDisplay(days, hours, minutes, seconds);
     if (countdown < 1000) {
       clearInterval(timer);
       date.disabled = false;
@@ -68,3 +71,5 @@ function convertMs(ms) {
 function addLeadingZero(value) {
   return `${value}`.padStart(2, '0');
 }
+
+start.addEventListener('click', onClick);
